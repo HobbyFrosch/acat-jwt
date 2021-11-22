@@ -72,6 +72,7 @@ class Token {
 
         $this->config = $config;
         $this->publicKey = $publicKey;
+
     }
 
     /**
@@ -80,7 +81,7 @@ class Token {
      */
     public function createToken(string $token) : void {
 
-        $jwt = JWT::decode($token, $this->getPublicKey());
+        $jwt = JWT::decode($token, $this->getPublicKey(), 'RS256');
 
         if (!\array_key_exists('iss', $jwt) || $jwt['iss'] !== $this->config['issuer']) {
             throw new TokenException('invalid issuer');
