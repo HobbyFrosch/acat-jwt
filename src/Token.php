@@ -4,6 +4,7 @@ namespace ACAT\JWT;
 
 use ACAT\JWT\Exception\TokenException;
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 /**
  *
@@ -36,9 +37,9 @@ class Token {
     private string $accessToken;
 
     /**
-     * @var array
+     * @var string
      */
-    private array $scopes;
+    private string $scopes;
 
     /**
      * @var string
@@ -81,14 +82,10 @@ class Token {
      */
     public function createToken(string $token) : void {
 
-        $jwt = JWT::decode($token, $this->getPublicKey(), 'RS256');
+        $jwt = (array) JWT::decode($token, new Key($this->getPublicKey(), 'RS256'));
 
         if (!\array_key_exists('iss', $jwt) || $jwt['iss'] !== $this->config['issuer']) {
             throw new TokenException('invalid issuer');
-        }
-
-        if (!\array_key_exists('exp', $jwt) || !$jwt['exp']) {
-            throw new TokenException('token is expired');
         }
 
         if (!\array_key_exists('name', $jwt) || !$jwt['name']) {
@@ -132,7 +129,7 @@ class Token {
      * @param string $issuer
      * @throws TokenException
      */
-    public function setIssuer(string $issuer): void {
+    private function setIssuer(string $issuer): void {
 
         if ($issuer !== $this->config['issuer']) {
             throw new TokenException('issuer verification failed');
@@ -153,7 +150,7 @@ class Token {
      * @param int $expireDate
      * @throws TokenException
      */
-    public function setExpireDate(int $expireDate): void {
+    private function setExpireDate(int $expireDate): void {
 
         if (time() > $expireDate) {
             throw new TokenException('token is expired');
@@ -173,7 +170,7 @@ class Token {
     /**
      * @param string $name
      */
-    public function setName(string $name): void {
+    private function setName(string $name): void {
         $this->name = $name;
     }
 
@@ -201,7 +198,7 @@ class Token {
     /**
      * @param string $accessToken
      */
-    public function setAccessToken(string $accessToken): void {
+    private function setAccessToken(string $accessToken): void {
         $this->accessToken = $accessToken;
     }
 
@@ -214,9 +211,15 @@ class Token {
 
     /**
      * @param array $scopes
+     * @throws TokenException
      */
-    public function setScopes(array $scopes): void {
-
+    private function setScopes(array $scopes): void {
+        foreach ($scopes as $scope) {
+            if (!str_contains($this->config['scope'], $scope)) {
+                throw new TokenException('scope is not matching');
+            }
+        }
+        $this->scopes = implode(" ", $scopes);
     }
 
     /**
@@ -229,7 +232,7 @@ class Token {
     /**
      * @param string $userId
      */
-    public function setUserId(string $userId): void {
+    private function setUserId(string $userId): void {
         $this->userId = $userId;
     }
 
@@ -237,14 +240,7 @@ class Token {
      * @return string
      */
     public function getPublicKey(): string {
-        return fopen('file://' . $this->publicKey);
-    }
-
-    /**
-     * @param string $publicKey
-     */
-    public function setPublicKey(string $publicKey): void {
-        $this->publicKey = $publicKey;
+        return file_get_contents($this->publicKey);
     }
 
 }

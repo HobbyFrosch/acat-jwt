@@ -14,7 +14,7 @@
         "sort-packages": true
     },
     "require": {
-        "php": ">=7.4",
+        "php": "8.0",
         "ext-json": "*",
         "ext-sockets": "*",
         "firebase/php-jwt": "^5.5"
