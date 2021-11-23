@@ -14,9 +14,8 @@
         "sort-packages": true
     },
     "require": {
-        "php": "8.0",
+        "php": ">=8.0",
         "ext-json": "*",
-        "ext-sockets": "*",
         "firebase/php-jwt": "^5.5"
     },
     "require-dev": {
