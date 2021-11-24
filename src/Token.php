@@ -238,9 +238,18 @@ class Token {
 
     /**
      * @return string
+     * @throws TokenException
      */
     public function getPublicKey(): string {
-        return file_get_contents($this->publicKey);
+
+        $key = file_get_contents($this->publicKey);
+
+        if (!$key) {
+            throw new TokenException('invalid key');
+        }
+
+        return $key;
+
     }
 
 }

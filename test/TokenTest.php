@@ -257,7 +257,7 @@ class TokenTest extends TestCase {
     private function getPayload(): array {
         return [
             "iss"     => "https://foo.de",
-            "exp"     => time() + 10,
+            "exp"     => time() + 1000000000000,
             "name"    => "User",
             "email"   => "user@domain.tld",
             "at_hah"  => "bild",
