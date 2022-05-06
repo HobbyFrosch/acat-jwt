@@ -19,9 +19,21 @@ class AcatToken {
     private array $payload;
 
     /**
+     * @var string
+     */
+    private string $privateKey;
+
+    /**
      * @var TokenEncoded
      */
     private TokenEncoded $tokenEncoded;
+
+    /**
+     * @param string $privateKey
+     */
+    public function __construct(string $privateKey) {
+        $this->privateKey = $privateKey;
+    }
 
     /**
      * @param string $token
@@ -141,10 +153,10 @@ class AcatToken {
     }
 
     /**
-     * @param string $privateKey
      * @return string
      */
-    public function encode(string $privateKey) : string {
+    public function encode() : string {
+        $privateKey = file_get_contents($this->privateKey);
         return (new TokenDecoded($this->payload))->encode($privateKey, JWT::ALGORITHM_RS256)->toString();
     }
 }
