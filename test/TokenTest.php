@@ -3,7 +3,7 @@
 namespace Tests;
 
 use ACAT\JWT\Exception\TokenException;
-use ACAT\JWT\Token;
+use ACAT\JWT\AcatToken;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use PHPUnit\Framework\TestCase;
@@ -14,16 +14,14 @@ use PHPUnit\Framework\TestCase;
 class TokenTest extends TestCase {
 
     /**
-     * @test
-     * @throws \ACAT\JWT\Exception\TokenException
+     * @return void
      */
     public function aTokenCanBeCreated(): void {
 
-        $config = $this->getConfig();
         $jwt = $this->aJWTCanBeCreated();
 
-        $token = new Token($config, 'file://' . __DIR__ . '/resources/public.key');
-        $this->assertInstanceOf(Token::class, $token);
+        $token = new AcatToken();
+        $this->assertInstanceOf(AcatToken::class, $token);
 
         $token->createToken($jwt);
 
@@ -83,8 +81,8 @@ class TokenTest extends TestCase {
 
         unset($config['issuer']);
 
-        $token = new Token($config, 'file://' . __DIR__ . '/resources/public.key');
-        $this->assertInstanceOf(Token::class, $token);
+        $token = new AcatToken($config, 'file://' . __DIR__ . '/resources/public.key');
+        $this->assertInstanceOf(AcatToken::class, $token);
 
         $token->createToken($jwt);
 
@@ -103,8 +101,8 @@ class TokenTest extends TestCase {
 
         $config['issuer'] = 'foo';
 
-        $token = new Token($config, 'file://' . __DIR__ . '/resources/public.key');
-        $this->assertInstanceOf(Token::class, $token);
+        $token = new AcatToken($config, 'file://' . __DIR__ . '/resources/public.key');
+        $this->assertInstanceOf(AcatToken::class, $token);
 
         $token->createToken($jwt);
 
@@ -125,8 +123,8 @@ class TokenTest extends TestCase {
 
         $jwt = JWT::encode($payload, $this->getPrivateKey(), 'RS256');
 
-        $token = new Token($config, 'file://' . __DIR__ . '/resources/public.key');
-        $this->assertInstanceOf(Token::class, $token);
+        $token = new AcatToken($config, 'file://' . __DIR__ . '/resources/public.key');
+        $this->assertInstanceOf(AcatToken::class, $token);
 
         $token->createToken($jwt);
 
@@ -147,8 +145,8 @@ class TokenTest extends TestCase {
 
         $jwt = JWT::encode($payload, $this->getPrivateKey(), 'RS256');
 
-        $token = new Token($config, 'file://' . __DIR__ . '/resources/public.key');
-        $this->assertInstanceOf(Token::class, $token);
+        $token = new AcatToken($config, 'file://' . __DIR__ . '/resources/public.key');
+        $this->assertInstanceOf(AcatToken::class, $token);
 
         $token->createToken($jwt);
 
@@ -169,8 +167,8 @@ class TokenTest extends TestCase {
 
         $jwt = JWT::encode($payload, $this->getPrivateKey(),'RS256');
 
-        $token = new Token($config, 'file://' . __DIR__ . '/resources/public.key');
-        $this->assertInstanceOf(Token::class, $token);
+        $token = new AcatToken($config, 'file://' . __DIR__ . '/resources/public.key');
+        $this->assertInstanceOf(AcatToken::class, $token);
 
         $token->createToken($jwt);
 
@@ -191,8 +189,8 @@ class TokenTest extends TestCase {
 
         $jwt = JWT::encode($payload, $this->getPrivateKey(), 'RS256');
 
-        $token = new Token($config, 'file://' . __DIR__ . '/resources/public.key');
-        $this->assertInstanceOf(Token::class, $token);
+        $token = new AcatToken($config, 'file://' . __DIR__ . '/resources/public.key');
+        $this->assertInstanceOf(AcatToken::class, $token);
 
         $token->createToken($jwt);
 
@@ -213,8 +211,8 @@ class TokenTest extends TestCase {
 
         $jwt = JWT::encode($payload, $this->getPrivateKey(), 'RS256');
 
-        $token = new Token($config, 'file://' . __DIR__ . '/resources/public.key');
-        $this->assertInstanceOf(Token::class, $token);
+        $token = new AcatToken($config, 'file://' . __DIR__ . '/resources/public.key');
+        $this->assertInstanceOf(AcatToken::class, $token);
 
         $token->createToken($jwt);
 
@@ -234,8 +232,8 @@ class TokenTest extends TestCase {
 
         $jwt = JWT::encode($payload, $this->getPrivateKey(), 'RS256');
 
-        $token = new Token($config, 'file://' . __DIR__ . '/resources/public.key');
-        $this->assertInstanceOf(Token::class, $token);
+        $token = new AcatToken($config, 'file://' . __DIR__ . '/resources/public.key');
+        $this->assertInstanceOf(AcatToken::class, $token);
 
         $token->createToken($jwt);
 
