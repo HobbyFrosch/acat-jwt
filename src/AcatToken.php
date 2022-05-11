@@ -3,6 +3,7 @@
 namespace ACAT\JWT;
 
 use ACAT\JWT\Exception\TokenException;
+use DateTime;
 use Nowakowskir\JWT\JWT;
 use Nowakowskir\JWT\TokenDecoded;
 use Nowakowskir\JWT\TokenEncoded;
@@ -97,6 +98,14 @@ class AcatToken {
      */
     public function getExpireDate(): int {
         return $this->payload['exp'];
+    }
+
+    /**
+     * @param DateTime $expireDate
+     * @return int
+     */
+    public function setExpireData(DateTime $expireDate) : int {
+        $this->payload['exp'] = $expireDate->getTimestamp();
     }
 
     /**
