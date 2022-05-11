@@ -102,9 +102,9 @@ class AcatToken {
 
     /**
      * @param DateTime $expireDate
-     * @return int
+     * @return void
      */
-    public function setExpireData(DateTime $expireDate) : int {
+    public function setExpireData(DateTime $expireDate) : void {
         $this->payload['exp'] = $expireDate->getTimestamp();
     }
 
