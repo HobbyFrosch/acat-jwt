@@ -166,6 +166,6 @@ class AcatToken {
      */
     public function encode() : string {
         $privateKey = file_get_contents($this->privateKey);
-        return (new TokenDecoded($this->payload))->encode($privateKey, JWT::ALGORITHM_RS256)->toString();
+        return (new TokenDecoded($this->payload, ['typ' => 'JWT']))->encode($privateKey, JWT::ALGORITHM_RS256)->toString();
     }
 }
