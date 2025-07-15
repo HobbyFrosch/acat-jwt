@@ -25,6 +25,13 @@ readonly class PlainTokenAdapter implements TokenInterface {
     }
 
     /**
+     * @return string|null
+     */
+    public function getName() : ?string {
+        return $this->getClaim('name');
+    }
+
+    /**
      * @return string
      *
      * @param   string  $claim

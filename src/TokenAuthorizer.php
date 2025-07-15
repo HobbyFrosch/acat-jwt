@@ -19,6 +19,7 @@ class TokenAuthorizer
      * @throws TokenException
      * @return bool
      *
+     * @param   string          $requiredIssuer
      * @param   string|null     $requiredRole
      * @param   TokenInterface  $token
      * @param   string          $resourceName

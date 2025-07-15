@@ -14,6 +14,11 @@ interface TokenInterface
     public function getUserId() : ?string;
 
     /**
+     * @return string|null
+     */
+    public function getName() : ?string;
+
+    /**
      * @return mixed
      *
      * @param   string  $claim
