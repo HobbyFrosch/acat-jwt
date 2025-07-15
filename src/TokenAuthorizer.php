@@ -23,7 +23,7 @@ class TokenAuthorizer
      * @param   TokenInterface  $token
      * @param   string          $resourceName
      */
-    public function authorize(TokenInterface $token, string $resourceName, ?string $requiredRole = null) : bool {
+    public function authorize(TokenInterface $token, string $resourceName, string $requiredIssuer, ?string $requiredRole = null) : bool {
 
         $resourceOwner = $token->getClaim(self::CLAIM_RESOURCE_ACCESS);
 
