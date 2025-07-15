@@ -37,7 +37,7 @@ class TokenDecoder
      * @param   string  $realm
      * @param   string  $authorizationUrl
      */
-    public function __construct(string $realm, string $authorizationUrl)
+    public function __construct(string $authorizationUrl, string $realm)
     {
         $this->realm = $realm;
         $this->authorizationUrl = $authorizationUrl;
