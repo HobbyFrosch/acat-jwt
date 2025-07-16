@@ -10,10 +10,12 @@ use Lcobucci\JWT\Token\Plain;
 readonly class PlainTokenAdapter implements TokenInterface {
 
     /**
-     * @param   Plain  $token
+     * @param   Plain   $token
+     * @param   string  $jwt
      */
     public function __construct(
-        private Plain $token
+        private Plain $token,
+        private string $jwt
     ) {}
 
     /**
@@ -41,9 +43,9 @@ readonly class PlainTokenAdapter implements TokenInterface {
         return $this->token->claims()->get($claim) ?? null;
     }
 
-    public function getAccessToken() : string
+    public function getJWT() : string
     {
-        return "foo";
+        return $this->jwt;
     }
 
 }
