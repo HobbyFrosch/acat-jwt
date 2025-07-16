@@ -41,7 +41,7 @@ readonly class PlainTokenAdapter implements TokenInterface {
         return $this->token->claims()->get($claim) ?? null;
     }
 
-    public function getTokenId() : string
+    public function getAccessToken() : string
     {
         return "foo";
     }

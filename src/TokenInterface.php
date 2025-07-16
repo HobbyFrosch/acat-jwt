@@ -11,7 +11,7 @@ interface TokenInterface
     /**
      * @return string
      */
-    public function getTokenId() : string;
+    public function getAccessToken() : string;
 
     /**
      * @return string|null
