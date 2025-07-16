@@ -2,6 +2,7 @@
 
 namespace ACAT\JWT;
 
+use Exception;
 use phpseclib3\Crypt\RSA;
 use Lcobucci\JWT\Token\Plain;
 use Lcobucci\JWT\Token\Parser;
@@ -149,7 +150,7 @@ class TokenDecoder
     private function base64url_decode(string $data) : string
     {
         $replaced = strtr($data, '-_', '+/');
-        $padded = str_pad($replaced, strlen($replaced) % 4 === 0 ? strlen($replaced) : strlen($replaced) + (4 - strlen($replaced) % 4), '=', STR_PAD_RIGHT);
+        $padded = str_pad($replaced, strlen($replaced) % 4 === 0 ? strlen($replaced) : strlen($replaced) + (4 - strlen($replaced) % 4), '=');
 
         return base64_decode($padded);
     }
