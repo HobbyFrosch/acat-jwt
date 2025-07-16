@@ -62,7 +62,7 @@ class TokenDecoder
         /** @var Plain $parsedToken */
         $parsedToken = $config->parser()->parse($token);
 
-        return new PlainTokenAdapter($parsedToken);
+        return new PlainTokenAdapter($parsedToken, $token);
 
     }
 
