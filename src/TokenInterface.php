@@ -9,6 +9,11 @@ interface TokenInterface
 {
 
     /**
+     * @return string
+     */
+    public function getTokenId() : string;
+
+    /**
      * @return string|null
      */
     public function getUserId() : ?string;
